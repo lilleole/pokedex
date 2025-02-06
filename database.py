@@ -74,6 +74,23 @@ class Database:
         except lite.Error as error:
             print("Error occurred while inserting data -", error)
 
+    def printdata(self):
+        self.cursor.execute("SELECT * FROM pokemon")
+        rows = self.cursor.fetchall()
+        for row in rows:
+            print(row)
+
+
+    def searchDatabaseID(self,id):
+        self.cursor.execute("SELECT * FROM pokemon WHERE id = ?", (id,))
+        print(self.cursor.fetchone())
+
+
+    def searchDatabaseName(self,name):
+        self.cursor.execute("SELECT * FROM pokemon WHERE NAME = ?", (name,))
+        print(self.cursor.fetchone())
+
+
     def close(self):
         if self.connection:
             self.connection.close()
